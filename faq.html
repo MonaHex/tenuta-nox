@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Tenuta Nox</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <style>
+        .info-page {
+            padding: 140px 0 80px;
+            background: var(--bg-cream);
+            min-height: 100vh;
+        }
+        
+        .info-page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .info-page-header .section-subtitle {
+            text-align: center;
+        }
+        
+        .info-page-header .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Search Bar */
+        .faq-search {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        
+        .faq-search input {
+            width: 100%;
+            padding: 18px 50px 18px 25px;
+            font-size: 1rem;
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-radius: 50px;
+            background: var(--white);
+            transition: var(--transition);
+            font-family: 'Lato', sans-serif;
+        }
+        
+        .faq-search input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.1);
+        }
+        
+        .faq-search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-gold);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--dark-blue);
+        }
+        
+        .faq-search button:hover {
+            background: var(--primary-gold-dark);
+        }
+        
+        .faq-search button i {
+            font-size: 1.1rem;
+        }
+        
+        /* No results message */
+        .faq-no-results {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+        
+        .faq-no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-gold);
+        }
+        
+        .faq-no-results h3 {
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        /* Category Navigation */
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .faq-category-btn {
+            padding: 10px 20px;
+            background: var(--white);
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .faq-category-btn:hover,
+        .faq-category-btn.active {
+            background: var(--primary-gold);
+            border-color: var(--primary-gold);
+            color: var(--dark-blue);
+        }
+        
+        .faq-category-btn.active {
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+        }
+        
+        .faq-category-btn i {
+            font-size: 1rem;
+        }
+        
+        .info-content {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .info-content .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            color: var(--primary-gold);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .info-content .back-link:hover {
+            color: var(--burgundy);
+        }
+        
+        .faq-section {
+            margin-bottom: 40px;
+        }
+        
+        .faq-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--burgundy);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-gold);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .faq-section h2 i {
+            color: var(--primary-gold);
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(201, 162, 39, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-item.highlight {
+            border-color: var(--primary-gold);
+            background: rgba(201, 162, 39, 0.03);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background: var(--white);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+        
+        .faq-question span {
+            flex: 1;
+            padding-right: 15px;
+        }
+        
+        .faq-question i {
+            color: var(--primary-gold);
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: var(--bg-light);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .faq-answer ul {
+            margin: 15px 0 15px 30px;
+            list-style: disc;
+        }
+        
+        .faq-answer li {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .faq-answer a {
+            color: var(--burgundy);
+            text-decoration: underline;
+        }
+        
+        .faq-answer a:hover {
+            color: var(--primary-gold);
+        }
+        
+        /* Helpful feedback */
+        .faq-helpful {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .faq-item.active .faq-helpful {
+            opacity: 1;
+        }
+        
+        .faq-helpful span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .faq-helpful-btn {
+            padding: 8px 16px;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.2);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: 'Lato', sans-serif;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .faq-helpful-btn:hover {
+            border-color: var(--primary-gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .faq-helpful-btn.active {
+            background: var(--primary-gold);
+            border-color: var(--primary-gold);
+            color: var(--dark-blue);
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--burgundy);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+        
+        .back-to-top i {
+            font-size: 1.2rem;
+        }
+        
+        .faq-contact {
+            background: var(--bg-cream);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .faq-contact h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--burgundy);
+            margin-bottom: 15px;
+        }
+        
+        .faq-contact p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .faq-contact-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .info-content {
+                padding: 30px 20px;
+            }
+            
+            .info-page-header .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .faq-search {
+                padding: 0 10px;
+            }
+            
+            .faq-categories {
+                gap: 8px;
+            }
+            
+            .faq-category-btn {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .faq-category-btn i {
+                display: none;
+            }
+            
+            .faq-question {
+                padding: 15px;
+                font-size: 0.95rem;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 15px;
+            }
+            
+            .faq-contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                Tenuta Nox <span class="logo-icon">🍷</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#azienda" class="nav-link">L'Azienda</a></li>
+                <li><a href="index.html#vini" class="nav-link">I Nostri Vini</a></li>
+                <li><a href="index.html#degustazioni" class="nav-link">Degustazioni</a></li>
+                <li><a href="index.html#shop" class="nav-link">Shop</a></li>
+                <li><a href="index.html#contatti" class="nav-link nav-cta">Contatti</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- FAQ Content -->
+    <section class="info-page">
+        <div class="container">
+            <div class="info-page-header">
+                <span class="section-subtitle">Domande Frequenti</span>
+                <h1 class="section-title">Frequently Asked Questions</h1>
+                <p>Tutto quello che devi sapere su Tenuta Nox e i nostri vini</p>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="faq-search">
+                <input type="text" id="faq-search-input" placeholder="Cerca una domanda..." aria-label="Cerca nelle FAQ">
+                <button type="button" aria-label="Cerca">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <!-- Category Navigation -->
+            <div class="faq-categories">
+                <button class="faq-category-btn active" data-category="all">
+                    <i class="fas fa-layer-group"></i> Tutte
+                </button>
+                <button class="faq-category-btn" data-category="general">
+                    <i class="fas fa-wine-glass-alt"></i> Generali
+                </button>
+                <button class="faq-category-btn" data-category="vini">
+                    <i class="fas fa-wine-bottle"></i> I Nostri Vini
+                </button>
+                <button class="faq-category-btn" data-category="shop">
+                    <i class="fas fa-shopping-cart"></i> Acquisti
+                </button>
+                <button class="faq-category-btn" data-category="spedizioni">
+                    <i class="fas fa-truck"></i> Spedizioni
+                </button>
+                <button class="faq-category-btn" data-category="eventi">
+                    <i class="fas fa-gift"></i> Regali
+                </button>
+            </div>
+            
+            <!-- No Results Message -->
+            <div class="faq-no-results" id="faq-no-results">
+                <i class="fas fa-search"></i>
+                <h3>Nessun risultato trovato</h3>
+                <p>Prova a modificare la tua ricerca o sfoglia le categorie qui sopra.</p>
+            </div>
+            
+            <div class="info-content" id="faq-content">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Torna al sito
+                </a>
+                
+                <!-- General Questions -->
+                <div class="faq-section" data-category="general">
+                    <h2><i class="fas fa-wine-glass-alt"></i> Informazioni Generali</h2>
+                    
+                    <div class="faq-item" data-keywords="posizione dove si trova indirizzo">
+                        <div class="faq-question">
+                            <span>Dove si trova la Tenuta Nox?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>La Tenuta Nox si trova nel cuore delle colline di Alba, in provincia di Cuneo, Piemonte. Il nostro indirizzo è Via delle Vigne, 123, 12050 Alba (CN). La cantina è immersa in un paesaggio collinare ideale per la coltivazione delle uve, a pochi chilometri dal centro storico di Alba.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="storia anno fondazione 1890 famiglia generazioni">
+                        <div class="faq-question">
+                            <span>Da quanto tempo esiste la Tenuta Nox?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>La Tenuta Nox è stata fondata nel 1890 dalla famiglia Nox. Da oltre quattro generazioni, coltiviamo con passione e dedizione le nostre viti, tramandando di padre in figlio i segreti della vinificazione e il profondo rispetto per il territorio.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="orari apertura lunedì martedì mercoledì giovedì venerdì sabato domenica chiusura">
+                        <div class="faq-question">
+                            <span>Quali sono gli orari di apertura della cantina?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>La nostra cantina è aperta al pubblico con i seguenti orari:</p>
+                            <ul>
+                                <li><strong>Lunedì - Venerdì:</strong> 9:00-12:30 e 14:30-18:30</li>
+                                <li><strong>Sabato:</strong> 9:00-13:00</li>
+                                <li><strong>Domenica:</strong> Chiuso (su prenotazione per gruppi)</li>
+                            </ul>
+                            <p>Consigliamo di prenotare la vostra visita in anticipo, soprattutto per i fine settimana e i periodi di festa.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="visita cantina tour degustazione prenotazione guidata">
+                        <div class="faq-question">
+                            <span>Posso visitare la cantina?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Certo! Offriamo diverse esperienze di visita alla cantina:</p>
+                            <ul>
+                                <li><strong>Visita Classica:</strong> Un tour guidato attraverso le nostre barricaie e cantine storiche</li>
+                                <li><strong>Degustazione Classica:</strong> Assaggio di 5 vini rappresentativi della nostra produzione</li>
+                                <li><strong>Degustazione Premium:</strong> Un viaggio attraverso le nostre riserve più pregiate</li>
+                                <li><strong>Degustazione Gourmet:</strong> Abbinamento vini-menu preparato da uno chef locale</li>
+                            </ul>
+                            <p>Tutte le visite devono essere prenotate in anticipo. Visitare la sezione <a href="index.html#degustazioni">Degustazioni</a> del nostro sito per maggiori dettagli.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Products Questions -->
+                <div class="faq-section" data-category="vini">
+                    <h2><i class="fas fa-wine-bottle"></i> I Nostri Vini</h2>
+                    
+                    <div class="faq-item" data-keywords="tipologie vini rossi bianchi spumanti passiti barbera nebbiolo chardonnay moscato">
+                        <div class="faq-question">
+                            <span>Quali tipologie di vino produciamo?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>La Tenuta Nox produce un'ampia gamma di vini per soddisfare ogni gusto:</p>
+                            <ul>
+                                <li><strong>Vini Rossi:</strong> Tenuta Nox DOC, Riserva Speciale, Barbera d'Asti, Nebbiolo d'Alba</li>
+                                <li><strong>Vini Bianchi:</strong> Chardonnay Tenuta Nox, Sauvignon Blanc, Roero Arneis, Moscato d'Asti</li>
+                                <li><strong>Spumanti:</strong> Brut Millesimato, Rosé Brut, Extra Dry</li>
+                                <li><strong>Passiti:</strong> Moscato Passito, Malvasia Passita, Vin Santo</li>
+                            </ul>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="biologico bio certificato sostenibile ambiente">
+                        <div class="faq-question">
+                            <span>I vini Tenuta Nox sono biologici?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sì! La nostra linea "Bio" è certificata biologica. Coltiviamo le nostre uve Bio secondo i rigidi regolamenti europei, evitando pesticidi e fertilizzanti chimici di sintesi. Inoltre, offriamo una <strong>Degustazione Bio</strong> dedicata proprio a questi vini, dove potrete scoprire i nostri vitigni coltivati con metodi sostenibili e rispettosi dell'ambiente.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="conservare vino cantina temperatura umidità posizione">
+                        <div class="faq-question">
+                            <span>Come devo conservare i vini acquistati?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Per una conservazione ottimale dei vini, consigliamo:</p>
+                            <ul>
+                                <li><strong>Temperatura:</strong> Tra i 12-15°C, costante e lontano da fonti di calore</li>
+                                <li><strong>Umidità:</strong> Tra il 65-75% per mantenere i tappi in condizioni ideali</li>
+                                <li><strong>Luce:</strong> Tenere al riparo dalla luce diretta del sole e da lampade intense</li>
+                                <li><strong>Posizione:</strong> Bottiglie di vino rosso coricate, vini bianchi in posizione verticale</li>
+                                <li><strong>Quietud:</strong> Evitare vibrazioni frequenti</li>
+                            </ul>
+                            <p>Per vini da lungo invecchiamento, una cantina climatizzata è l'ideale.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="differenza tipi rosso bianco spumante passito tannini acidità">
+                        <div class="faq-question">
+                            <span>Qual è la differenza tra i diversi tipi di vino?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ecco una breve guida:</p>
+                            <ul>
+                                <li><strong>Vini Rossi:</strong> Fermentati con le bucce, hanno tannicità e colore. Ideali con carni, formaggi stagionati e piatti strutturati.</li>
+                                <li><strong>Vini Bianchi:</strong> Fermentati senza bucce (o con breve contatto), sono freschi e aromatici. Perfetti con pesce, verdure e formaggi freschi.</li>
+                                <li><strong>Spumanti:</strong> Hanno bollicine naturali da seconda fermentazione. L'Extra Dry è più dolce, il Brut è più secco.</li>
+                                <li><strong>Passiti:</strong> Vini dolci da uve appassite. Ideali con dessert, formaggi erborinati o come vino da meditazione.</li>
+                            </ul>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="temperatura servizio freddo fresco temperatura ambiente">
+                        <div class="faq-question">
+                            <span>A che temperatura servire i vini?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Le temperature di servizio consigliate variano in base al tipo di vino:</p>
+                            <ul>
+                                <li><strong>Spumanti e Bianchi freschi:</strong> 6-8°C</li>
+                                <li><strong>Bianchi strutturati:</strong> 10-12°C</li>
+                                <li><strong>Vini rosati:</strong> 10-12°C</li>
+                                <li><strong>Vini rossi giovani:</strong> 14-16°C</li>
+                                <li><strong>Vini rossi invecchiati:</strong> 16-18°C</li>
+                                <li><strong>Passiti:</strong> 10-12°C</li>
+                            </ul>
+                            <p>È sempre meglio servire il vino troppo fresco che troppo caldo: potete sempre lasciarlo "respirare" per raggiungere la temperatura ideale.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Online Shop Questions -->
+                <div class="faq-section" data-category="shop">
+                    <h2><i class="fas fa-shopping-cart"></i> Acquisti Online</h2>
+                    
+                    <div class="faq-item" data-keywords="ordine acquistare come fare procedura checkout">
+                        <div class="faq-question">
+                            <span>Come posso effettuare un ordine?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Acquistare sul nostro shop online è semplice:</p>
+                            <ul>
+                                <li>Sfoglia il catalogo e aggiungi i prodotti al carrello</li>
+                                <li>Registrati o accedi al tuo account</li>
+                                <li>Seleziona l'indirizzo di consegna</li>
+                                <li>Scegli il metodo di pagamento preferito</li>
+                                <li>Conferma l'ordine</li>
+                            </ul>
+                            <p>Riceverai una email di conferma con tutti i dettagli dell'ordine e il tracciamento della spedizione.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="pagamento carta credito paypal bonifico contrassegno metodi">
+                        <div class="faq-question">
+                            <span>Quali metodi di pagamento sono accettati?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Accettiamo i seguenti metodi di pagamento:</p>
+                            <ul>
+                                <li><strong>Carte di credito/debito:</strong> Visa, Mastercard, American Express</li>
+                                <li><strong>PayPal:</strong> Per pagamenti rapidi e sicuri</li>
+                                <li><strong>Bonifico bancario:</strong> Le coordinate bancarie saranno inviate via email</li>
+                                <li><strong>Contrassegno:</strong> Pagamento alla consegna (solo Italia, costo aggiuntivo €3)</li>
+                            </ul>
+                            <p>Tutte le transazioni sono protette con crittografia SSL.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="ordine minimo importo limite">
+                        <div class="faq-question">
+                            <span>Qual è l'ordine minimo per effettuare un acquisto?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Non c'è un importo minimo per gli ordini online. Tuttavia, per ordini inferiori a €50 in Italia, viene applicata una tariffa di spedizione di €9,90. Ricorda che la spedizione è gratuita per ordini superiori a €150 in Italia!</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="acquisto diretto in cantina ritirare prodotti">
+                        <div class="faq-question">
+                            <span>Posso acquistare direttamente in cantina?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sì, è possibile acquistare direttamente presso la nostra cantina. Potrete vedere e scegliere personalmente i nostri vini, e i nostri esperti saranno a disposizione per consigliarvi. Inoltre, riserviamo spesso edizioni speciali disponibili solo in cantina!</p>
+                            <p>Durante la visita, potete anche ritirare gli ordini online effettuati in precedenza, selezionando l'opzione "Ritiro in Cantina" al checkout.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="restituire recesso rimborso 14 giorni">
+                        <div class="faq-question">
+                            <span>Posso restituire un prodotto acquistato?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>In conformità con il Codice del Consumo, avete il diritto di recedere dall'acquisto entro 14 giorni dalla ricezione, senza necessità di fornire motivazioni.</p>
+                            <p>Il prodotto deve essere restituito integro, nelle sue confezioni originali. Le spese di restituzione sono a carico del cliente. Provvederemo al rimborso entro 14 giorni dalla ricezione della comunicazione di recesso.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Shipping Questions -->
+                <div class="faq-section" data-category="spedizioni">
+                    <h2><i class="fas fa-truck"></i> Spedizioni e Consegne</h2>
+                    
+                    <div class="faq-item" data-keywords="paesi estero germania francia austria svizzera europa internazionale">
+                        <div class="faq-question">
+                            <span>In quali paesi effettuate spedizioni?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Spediamo in tutta Italia e in Europa. I principali paesi serviti includono:</p>
+                            <ul>
+                                <li><strong>Italia:</strong> Tutte le regioni, comprese isole</li>
+                                <li><strong>Europa:</strong> Germania, Francia, Austria, Svizzera, Belgio, Paesi Bassi, Lussemburgo, Regno Unito, Spagna, Portogallo, e altri paesi UE</li>
+                            </ul>
+                            <p>Per spedizioni extra-UE, vi preghiamo di contattarci per verificare la disponibilità e i costi.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="costo spedizione prezzo quanto costa gratis gratuita">
+                        <div class="faq-question">
+                            <span>Quanto costa la spedizione?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>I costi di spedizione variano in base alla destinazione:</p>
+                            <ul>
+                                <li><strong>Piemonte:</strong> gratuita sopra €100</li>
+                                <li><strong>Italia (escluse isole):</strong> €9,90, gratuita sopra €150</li>
+                                <li><strong>Isole:</strong> €14,90, gratuita sopra €200</li>
+                                <li><strong>Europa:</strong> €19,90 (gratuita sopra €250)</li>
+                            </ul>
+                            <p>Per dettagli completi, visitate la pagina <a href="spedizioni.html">Spedizioni</a>.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="tempo consegna quanto tempo giorni lavorativi">
+                        <div class="faq-question">
+                            <span>Quanto tempo richiede la consegna?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>I tempi di consegna variano in base alla destinazione:</p>
+                            <ul>
+                                <li><strong>Piemonte:</strong> 24-48 ore</li>
+                                <li><strong>Italia:</strong> 2-4 giorni lavorativi</li>
+                                <li><strong>Isole:</strong> 3-5 giorni lavorativi</li>
+                                <li><strong>Europa:</strong> 3-7 giorni lavorativi</li>
+                            </ul>
+                            <p>Gli ordini ricevuti entro le 14:00 vengono spediti lo stesso giorno (giorni lavorativi).</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="imballaggio scatola protezione bottiglie confezione">
+                        <div class="faq-question">
+                            <span>Come viene imballato il vino?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Utilizziamo imballaggi professionali specifici per il trasporto di bottiglie di vino:</p>
+                            <ul>
+                                <li>Scatole di cartone rinforzato con divisori interni</li>
+                                <li>Materiale ammortizzante (cartone ondulato, pluriball)</li>
+                                <li>In estate: scatole isotermiche con gel refrigeranti</li>
+                                <li>In inverno: materiale isolante aggiuntivo per protezione dal freddo</li>
+                            </ul>
+                            <p>Ogni bottiglia è singolarmente protetta per garantire l'integrità del prodotto.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="ritirare firma maggiore età 18 anni documento">
+                        <div class="faq-question">
+                            <span>Chi può ritirare la spedizione?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Per legge, la consegna di prodotti alcolici può avvenire solo a una persona maggiorenne (18+). Al momento della consegna, il corriere potrebbe richiedere un documento d'identità.</p>
+                            <p>Se non sarete presenti voi, assicuratevi che ci sia un altro adulto disponibile all'indirizzo indicato, oppure richiedete la consegna presso un altro indirizzo (ufficio, casa di parenti o amici, punto di ritiro se disponibile).</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="pacco danneggiato rotto rotto sostituzione rimborso">
+                        <div class="faq-question">
+                            <span>Cosa faccio se il pacco arriva danneggiato?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nel caso in cui il pacco arrivasse danneggiato:</p>
+                            <ul>
+                                <li><strong>Fotografate il danno:</strong> Scattate foto del pacco danneggiato e delle bottiglie prima di aprirlo</li>
+                                <li><strong>Contattateci entro 48 ore:</strong> Scrivete a info@tenutanox.it o chiamate il +39 0173 123456</li>
+                                <li><strong>Conservate tutto:</strong> Tenete il pacco, l'imballaggio e il prodotto danneggiato</li>
+                            </ul>
+                            <p>Provvederemo alla sostituzione gratuita o al rimborso integrale.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gift and Events Questions -->
+                <div class="faq-section" data-category="eventi">
+                    <h2><i class="fas fa-gift"></i> Regali ed Eventi</h2>
+                    
+                    <div class="faq-item" data-keywords="confezione regalo confezionare pacchetto">
+                        <div class="faq-question">
+                            <span>Potete preparare confezioni regalo?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sì! Offriamo un servizio di confezionamento regalo. Durante il checkout, potrete selezionare l'opzione "Confezione Regalo" che include:</p>
+                            <ul>
+                                <li>Scatola elegante con coperchio</li>
+                                <li>Carta di risposta decorata</li>
+                                <li>Fiocco e nastri Tenuta Nox</li>
+                                <li>Biglietto personalizzato con il vostro messaggio</li>
+                            </ul>
+                            <p>Il costo del servizio è di €5 per confezione. Potete anche richiedere confezioni personalizzate per eventi speciali contattandoci direttamente.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="evento privato matrimonio cena gala team building gruppo">
+                        <div class="faq-question">
+                            <span>Organizzate eventi privati nella cantina?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sì! La nostra cantina è disponibile per eventi privati e celebrazioni speciali:</p>
+                            <ul>
+                                <li><strong>Degustazioni private:</strong> Per gruppi fino a 20 persone</li>
+                                <li><strong>Cene di gala:</strong> In collaborazione con chef esterni</li>
+                                <li><strong>Matrimoni:</strong> Location esclusiva per ricevimenti intimi</li>
+                                <li><strong>Team building aziendali:</strong> Esperienze formative e conviviali</li>
+                            </ul>
+                            <p>Contattateci per ricevere un preventivo personalizzato in base alle vostre esigenze.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-keywords="gift card regalo buono valore">
+                        <div class="faq-question">
+                            <span>Posso acquistare gift card per Tenuta Nox?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sì! Le gift card Tenuta Nox sono il regalo perfetto per gli amanti del vino. Possono essere utilizzate per:</p>
+                            <ul>
+                                <li>Acquisti nello shop online</li>
+                                <li>Degustazioni ed esperienze in cantina</li>
+                                <li>Prodotti esclusivi disponibili solo in loco</li>
+                            </ul>
+                            <p>Le gift card sono disponibili in tagli da €25, €50, €100 e possono essere acquistate direttamente online o in cantina.</p>
+                            <div class="faq-helpful">
+                                <span>Questa risposta è stata utile?</span>
+                                <button class="faq-helpful-btn" data-value="yes"><i class="fas fa-thumbs-up"></i> Sì</button>
+                                <button class="faq-helpful-btn" data-value="no"><i class="fas fa-thumbs-down"></i> No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Section -->
+                <div class="faq-contact">
+                    <h3>Hai altre domande?</h3>
+                    <p>Non trovi la risposta che cercavi? Contattaci direttamente, saremo felici di aiutarti!</p>
+                    <div class="faq-contact-buttons">
+                        <a href="mailto:info@tenutanox.it" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i> Scrivici un'Email
+                        </a>
+                        <a href="tel:+390173123456" class="btn btn-outline">
+                            <i class="fas fa-phone"></i> Chiamaci
+                        </a>
+                        <a href="index.html#contatti" class="btn btn-outline-dark">
+                            <i class="fas fa-map-marker-alt"></i> Vieni a trovarci
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Torna su">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Tenuta Nox 🍷</h3>
+                    <p>Dal 1890, passione e tradizione in ogni bottiglia.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#azienda">L'Azienda</a></li>
+                        <li><a href="index.html#vini">I Nostri Vini</a></li>
+                        <li><a href="index.html#degustazioni">Degustazioni</a></li>
+                        <li><a href="index.html#shop">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Informazioni</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terminiecondizioni.html">Termini e Condizioni</a></li>
+                        <li><a href="spedizioni.html">Spedizioni</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Iscriviti per ricevere offerte esclusive.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="La tua email">
+                        <button type="submit" class="btn btn-primary">Iscriviti</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tenuta Nox. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            const faqSections = document.querySelectorAll('.faq-section');
+            const searchInput = document.getElementById('faq-search-input');
+            const categoryBtns = document.querySelectorAll('.faq-category-btn');
+            const noResults = document.getElementById('faq-no-results');
+            const faqContent = document.getElementById('faq-content');
+            const backToTop = document.querySelector('.back-to-top');
+            
+            // Accordion functionality
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                filterFAQs(searchTerm, getActiveCategory());
+            });
+            
+            // Category filtering
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter
+                    const searchTerm = searchInput.value.toLowerCase().trim();
+                    filterFAQs(searchTerm, this.dataset.category);
+                });
+            });
+            
+            function getActiveCategory() {
+                const activeBtn = document.querySelector('.faq-category-btn.active');
+                return activeBtn ? activeBtn.dataset.category : 'all';
+            }
+            
+            function filterFAQs(searchTerm, category) {
+                let visibleCount = 0;
+                let visibleSections = new Set();
+                
+                faqItems.forEach(item => {
+                    const itemCategory = item.closest('.faq-section').dataset.category;
+                    const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    const keywords = item.dataset.keywords ? item.dataset.keywords.toLowerCase() : '';
+                    
+                    const matchesCategory = category === 'all' || itemCategory === category;
+                    const matchesSearch = searchTerm === '' || 
+                                        question.includes(searchTerm) || 
+                                        answer.includes(searchTerm) ||
+                                        keywords.includes(searchTerm);
+                    
+                    if (matchesCategory && matchesSearch) {
+                        item.style.display = 'block';
+                        visibleCount++;
+                        visibleSections.add(itemCategory);
+                    } else {
+                        item.style.display = 'none';
+                        item.classList.remove('active');
+                    }
+                });
+                
+                // Show/hide sections based on visible items
+                faqSections.forEach(section => {
+                    const sectionCategory = section.dataset.category;
+                    const hasVisibleItems = Array.from(section.querySelectorAll('.faq-item')).some(item => item.style.display !== 'none');
+                    
+                    if (category === 'all' || sectionCategory === category) {
+                        section.style.display = hasVisibleItems ? 'block' : 'none';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide no results message
+                if (searchTerm !== '' && visibleCount === 0) {
+                    noResults.style.display = 'block';
+                    faqContent.style.display = 'none';
+                } else {
+                    noResults.style.display = 'none';
+                    faqContent.style.display = 'block';
+                }
+            }
+            
+            // Helpful feedback buttons
+            document.querySelectorAll('.faq-helpful-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const helpfulDiv = this.closest('.faq-helpful');
+                    const parentItem = this.closest('.faq-item');
+                    
+                    // Only allow one feedback per question
+                    if (helpfulDiv.querySelector('.faq-helpful-btn.active')) {
+                        return;
+                    }
+                    
+                    this.classList.add('active');
+                    
+                    // Visual feedback
+                    helpfulDiv.innerHTML = '<span style="color: var(--primary-gold);"><i class="fas fa-check"></i> Grazie per il tuo feedback!</span>';
+                    
+                    // Here you could send the feedback to a server
+                    console.log('Feedback ricevuto:', {
+                        question: parentItem.querySelector('.faq-question span').textContent,
+                        helpful: this.dataset.value
+                    });
+                });
+            });
+            
+            // Back to top button visibility
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // Back to top click handler
+            if (backToTop) {
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

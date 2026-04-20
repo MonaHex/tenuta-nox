@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spedizioni | Tenuta Nox</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <style>
+        .info-page {
+            padding: 140px 0 80px;
+            background: var(--bg-cream);
+            min-height: 100vh;
+        }
+        
+        .info-page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .info-page-header .section-subtitle {
+            text-align: center;
+        }
+        
+        .info-page-header .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+        
+        .info-content {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .info-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--burgundy);
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-gold);
+        }
+        
+        .info-content h2:first-child {
+            margin-top: 0;
+        }
+        
+        .info-content p {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.9;
+        }
+        
+        .info-content ul {
+            margin: 20px 0 30px 30px;
+            list-style: disc;
+        }
+        
+        .info-content li {
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+        
+        .info-content .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            color: var(--primary-gold);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .info-content .back-link:hover {
+            color: var(--burgundy);
+        }
+        
+        .shipping-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+        
+        .shipping-table th,
+        .shipping-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .shipping-table th {
+            background: var(--bg-cream);
+            font-weight: 600;
+            color: var(--burgundy);
+        }
+        
+        .shipping-table tr:hover {
+            background: var(--bg-light);
+        }
+        
+        .highlight-box {
+            background: var(--bg-cream);
+            border-left: 4px solid var(--primary-gold);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        .process-steps {
+            counter-reset: step;
+            margin: 40px 0;
+        }
+        
+        .process-step {
+            position: relative;
+            padding-left: 70px;
+            margin-bottom: 30px;
+        }
+        
+        .process-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gold);
+            color: var(--dark-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .process-step h3 {
+            margin-bottom: 10px;
+            color: var(--burgundy);
+        }
+        
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .icon-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px;
+            background: var(--bg-cream);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .icon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .icon-item i {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            flex-shrink: 0;
+        }
+        
+        .icon-item h4 {
+            margin-bottom: 10px;
+            color: var(--burgundy);
+        }
+        
+        .icon-item p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            .info-content {
+                padding: 30px 20px;
+            }
+            
+            .info-page-header .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .shipping-table {
+                font-size: 0.9rem;
+            }
+            
+            .shipping-table th,
+            .shipping-table td {
+                padding: 10px;
+            }
+            
+            .process-step {
+                padding-left: 60px;
+            }
+            
+            .process-step::before {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                Tenuta Nox <span class="logo-icon">🍷</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#azienda" class="nav-link">L'Azienda</a></li>
+                <li><a href="index.html#vini" class="nav-link">I Nostri Vini</a></li>
+                <li><a href="index.html#degustazioni" class="nav-link">Degustazioni</a></li>
+                <li><a href="index.html#shop" class="nav-link">Shop</a></li>
+                <li><a href="index.html#contatti" class="nav-link nav-cta">Contatti</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Spedizioni Content -->
+    <section class="info-page">
+        <div class="container">
+            <div class="info-page-header">
+                <span class="section-subtitle">Consegna e Trasporto</span>
+                <h1 class="section-title">Spedizioni e Consegne</h1>
+                <p>Scopri come portiamo i nostri vini direttamente a casa tua</p>
+            </div>
+            
+            <div class="info-content">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Torna al sito
+                </a>
+                
+                <h2>1. I Nostri Servizi di Spedizione</h2>
+                <p>Tenuta Nox si impegna a consegnare i propri prodotti in modo sicuro e tempestivo, in Italia e in tutta Europa. Grazie alla partnership con corrieri specializzati nel trasporto di prodotti alimentari e bevande, garantiamo che ogni bottiglia arrivi nelle condizioni migliori.</p>
+                
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <h4>Corrieri Specializzati</h4>
+                            <p>Spedizioni affidate a corrieri esperti nel trasporto di vino e bevande alcoliche.</p>
+                        </div>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-box-open"></i>
+                        <div>
+                            <h4>Imballaggio Protettivo</h4>
+                            <p>Confezioni rinforzate con materiali ammortizzanti per proteggere ogni bottiglia.</p>
+                        </div>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-temperature-low"></i>
+                        <div>
+                            <h4>Condizioni Controllate</h4>
+                            <p>Particolare attenzione alle temperature durante il trasporto estivo e invernale.</p>
+                        </div>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Tracking Completo</h4>
+                            <p>Segui la tua spedizione in tempo reale dal nostro magazzino alla tua porta.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2>2. Zone e Costi di Spedizione</h2>
+                <p>Offriamo diverse opzioni di spedizione in base alla destinazione e alle tue esigenze di consegna.</p>
+                
+                <table class="shipping-table">
+                    <thead>
+                        <tr>
+                            <th>Zona</th>
+                            <th>Destinazione</th>
+                            <th>Tempi di Consegna</th>
+                            <th>Costi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Zona 1</strong></td>
+                            <td>Piemonte (prov. di Cuneo, Asti, Alessandria)</td>
+                            <td>24-48 ore</td>
+                            <td>Gratuita sopra €100</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zona 2</strong></td>
+                            <td>Italia (escluse isole)</td>
+                            <td>2-4 giorni lavorativi</td>
+                            <td>€9,90 - Gratis sopra €150</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zona 3</strong></td>
+                            <td>Isole (Sicilia, Sardegna)</td>
+                            <td>3-5 giorni lavorativi</td>
+                            <td>€14,90 - Gratis sopra €200</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zona 4</strong></td>
+                            <td>Europa (Germania, Francia, Austria, Svizzera)</td>
+                            <td>3-7 giorni lavorativi</td>
+                            <td>€19,90</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zona 5</strong></td>
+                            <td>Resto d'Europa</td>
+                            <td>5-10 giorni lavorativi</td>
+                            <td>€29,90</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box">
+                    <p><strong>Spedizione Gratuita:</strong> Per ordini superiori agli importi indicati nella tabella, la spedizione è gratuita in tutta Italia. Per l'Europa, la spedizione gratuita è disponibile per ordini superiori a €250.</p>
+                </div>
+                
+                <h2>3. Come Effettuiamo le Spedizioni</h2>
+                <p>Il nostro processo di spedizione è stato studiato per garantire la massima cura dei prodotti:</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <h3>Conferma dell'Ordine</h3>
+                        <p>Riceverai una email di conferma con tutti i dettagli del tuo ordine e il riepilogo dei prodotti acquistati.</p>
+                    </div>
+                    <div class="process-step">
+                        <h3>Preparazione con Cura</h3>
+                        <p>I nostri operatori preparano l'ordine utilizzando imballaggi speciali con divisori in cartone e materiale ammortizzante per proteggere ogni singola bottiglia.</p>
+                    </div>
+                    <div class="process-step">
+                        <h3>Affidamento al Corriere</h3>
+                        <p>La spedizione viene affidata al corriere selezionato. Riceverai una email con il numero di tracciamento per monitorare la consegna.</p>
+                    </div>
+                    <div class="process-step">
+                        <h3>Consegna a Domicilio</h3>
+                        <p>Il corriere consegna direttamente all'indirizzo indicato. Per le spedizioni di alcolici, potrebbe essere richiesta la firma di un adulto maggiorenne.</p>
+                    </div>
+                </div>
+                
+                <h2>4. Politica di Trasporto in Estate</h2>
+                <p>Durante i mesi estivi (Giugno - Settembre), adottiamo precauzioni speciali per garantire la qualità dei nostri vini durante il trasporto:</p>
+                <ul>
+                    <li><strong>Spedizioni Thermopack:</strong> Utilizziamo scatole isotermiche con gel refrigeranti per proteggere il vino dalle alte temperature.</li>
+                    <li><strong>Giorni di Spedizione:</strong> Preferiamo spedire da Lunedì a Mercoledì per evitare che i pacchi sostino nei depositi del corriere durante il fine settimana.</li>
+                    <li><strong>Soglia Temperatura:</strong> In caso di temperature estreme, ci riserviamo di posticipare la spedizione fino a condizioni più favorevoli, informandovi tempestivamente.</li>
+                </ul>
+                <p>Queste misure aggiuntive sono incluse gratuitamente nel servizio di spedizione estiva.</p>
+                
+                <h2>5. Politica di Trasporto in Inverno</h2>
+                <p>Anche durante i mesi invernali prestiamo attenzione alle condizioni di trasporto:</p>
+                <ul>
+                    <li><strong>Protezione dal Freddo:</strong> Per spedizioni verso destinazioni con temperature molto rigide, utilizziamo imballaggi isolanti supplementari.</li>
+                    <li><strong>Monitoraggio Temperature:</strong> I nostri corrieri partner monitorano le condizioni climatiche e adottano le precauzioni necessarie.</li>
+                </ul>
+                
+                <h2>6. Problemi alla Consegna</h2>
+                <p>Nel rarissimo caso in cui il pacco arrivi danneggiato o non conforme, ti chiediamo di:</p>
+                <ul>
+                    <li><strong>Fotografare il danno:</strong> Scatta una foto del pacco danneggiato e delle bottiglie prima di aprirlo.</li>
+                    <li><strong>Comunicare entro 48 ore:</strong> Contattaci via email a info@tenutanox.it o telefonicamente al +39 0173 123456.</li>
+                    <li><strong>Conservare l'imballaggio:</strong> Tieni il pacco e tutti i materiali di imballaggio per eventuali ispezioni.</li>
+                </ul>
+                <p>Provvederemo alla sostituzione gratuita o al rimborso integrale del prodotto danneggiato.</p>
+                
+                <h2>7. Orari e Limitazioni</h2>
+                <p>Gli ordini vengono processati dal Lunedì al Venerdì, esclusi festivi. Gli ordini ricevuti entro le ore 14:00 vengono spediti il giorno stesso (per giorni lavorativi).</p>
+                <p>Il corriere effettua consegne dal Lunedì al Venerdì, dalle 9:00 alle 18:00. Non è possibile richiedere una fascia oraria specifica di consegna, ma potete indicare un indirizzo di consegna alternativo (ufficio, vicino, ecc.) dove sarete sicuri di trovare un maggiorenne.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Verifica dell'Età:</strong> Per legge, la consegna di prodotti alcolici può avvenire solo a una persona maggiorenne. Il corriere potrebbe richiedere un documento d'identità al momento della consegna. Se non sarete presenti voi stessi, assicuratevi che ci sia un altro adulto disponibile.</p>
+                </div>
+                
+                <h2>8. Spedizioni Internazionali</h2>
+                <p>Per le spedizioni al di fuori dell'Italia, vi ricordiamo che:</p>
+                <ul>
+                    <li><strong>Dazi e Tasse:</strong> Per le destinazioni extra-UE, potrebbero essere applicati dazi doganali e tasse locali, a carico del destinatario.</li>
+                    <li><strong>Documentazione:</strong> Tutte le spedizioni sono accompagnate da documentazione completa che dichiara il contenuto e il valore della merce.</li>
+                    <li><strong>Tempi Doganali:</strong> In caso di controlli doganali, i tempi di consegna potrebbero allungarsi. Purtroppo non abbiamo controllo su questi processi.</li>
+                </ul>
+                
+                <h2>9. Domande Frequenti</h2>
+                <p><strong>Posso modificare l'indirizzo di consegna dopo aver effettuato l'ordine?</strong><br>
+                Sì, è possibile modificare l'indirizzo di consegna prima che l'ordine venga spedito. Contattateci al più presto via email o telefono.</p>
+                
+                <p><strong>Cosa succede se non sono a casa al momento della consegna?</strong><br>
+                Il corriere lascerà un avviso di passaggio e tenterà una seconda consegna. Se anche il secondo tentativo fallisce, il pacco sarà depositato presso la sede del corriere per 5 giorni lavorativi.</p>
+                
+                <p><strong>Posso ritirare personalmente l'ordine?</strong><br>
+                Certo! È possibile ritirare l'ordine direttamente presso la nostra cantina in Via delle Vigne, 123, Alba (CN). Selezionate l'opzione "Ritiro in Cantina" al checkout.</p>
+                
+                <h2>10. Contatti per Spedizioni</h2>
+                <p>Per qualsiasi domanda o chiarimento riguardante le spedizioni, non esitate a contattarci:</p>
+                <ul>
+                    <li><strong>Email:</strong> logistica@tenutanox.it</li>
+                    <li><strong>Telefono:</strong> +39 0173 123456 (Lun-Ven 9:00-18:00)</li>
+                    <li><strong>WhatsApp:</strong> +39 345 1234567</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Tenuta Nox 🍷</h3>
+                    <p>Dal 1890, passione e tradizione in ogni bottiglia.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#azienda">L'Azienda</a></li>
+                        <li><a href="index.html#vini">I Nostri Vini</a></li>
+                        <li><a href="index.html#degustazioni">Degustazioni</a></li>
+                        <li><a href="index.html#shop">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Informazioni</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terminiecondizioni.html">Termini e Condizioni</a></li>
+                        <li><a href="spedizioni.html">Spedizioni</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Iscriviti per ricevere offerte esclusive.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="La tua email">
+                        <button type="submit" class="btn btn-primary">Iscriviti</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tenuta Nox. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1585 @@
+/* ============================================
+   TENUTA NOX - Premium Wine Website
+   Design ispirato a Le Vigne di Raito
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --primary-gold: #c9a227;
+    --primary-gold-dark: #a8861c;
+    --burgundy: #722f37;
+    --burgundy-dark: #5a252c;
+    --dark-blue: #1a1a2e;
+    --text-dark: #2c2c2c;
+    --text-light: #6b6b6b;
+    --bg-light: #fafafa;
+    --bg-cream: #f5f3ef;
+    --white: #ffffff;
+    --transition: all 0.3s ease;
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-dark);
+    background-color: var(--white);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--text-dark);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: transparent;
+    padding: 20px 0;
+    transition: var(--transition);
+}
+
+.main-nav.scrolled {
+    background: rgba(26, 26, 46, 0.98);
+    padding: 15px 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 1px;
+}
+
+.logo-icon {
+    margin-left: 8px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-gold);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--primary-gold);
+}
+
+.nav-cta {
+    background: var(--primary-gold);
+    color: var(--dark-blue) !important;
+    padding: 10px 25px !important;
+    border-radius: 30px;
+}
+
+.nav-cta:hover {
+    background: var(--primary-gold-dark);
+}
+
+.nav-cta::after {
+    display: none;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 2px;
+    background: var(--white);
+    transition: var(--transition);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1560493676-04071c5f467b?1920_1080') center/cover no-repeat;
+    transform: scale(1.1);
+    animation: slowZoom 20s infinite alternate;
+}
+
+@keyframes slowZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(114, 47, 55, 0.7) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 30px;
+}
+
+.hero-subtitle {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary-gold);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+}
+
+.hero-title {
+    font-size: 5rem;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 30px;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--white);
+    text-align: center;
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator span {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    opacity: 0.7;
+}
+
+.scroll-indicator i {
+    font-size: 1.2rem;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-10px); }
+    60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 35px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Lato', sans-serif;
+}
+
+.btn-primary {
+    background: var(--primary-gold);
+    color: var(--dark-blue);
+    border-color: var(--primary-gold);
+}
+
+.btn-primary:hover {
+    background: var(--primary-gold-dark);
+    border-color: var(--primary-gold-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(201, 162, 39, 0.4);
+}
+
+.btn-secondary {
+    background: var(--burgundy);
+    color: var(--white);
+    border-color: var(--burgundy);
+}
+
+.btn-secondary:hover {
+    background: var(--burgundy-dark);
+    border-color: var(--burgundy-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(114, 47, 55, 0.4);
+}
+
+.btn-accent {
+    background: var(--dark-blue);
+    color: var(--white);
+    border-color: var(--dark-blue);
+}
+
+.btn-accent:hover {
+    background: transparent;
+    color: var(--dark-blue);
+    transform: translateY(-3px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.btn-outline:hover {
+    background: var(--white);
+    color: var(--dark-blue);
+}
+
+.btn-outline-dark {
+    background: transparent;
+    color: var(--dark-blue);
+    border-color: var(--dark-blue);
+}
+
+.btn-outline-dark:hover {
+    background: var(--dark-blue);
+    color: var(--white);
+}
+
+.btn-light {
+    background: var(--white);
+    color: var(--dark-blue);
+    border-color: var(--white);
+}
+
+.btn-light:hover {
+    background: transparent;
+    color: var(--white);
+}
+
+.btn-outline-light {
+    background: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.btn-outline-light:hover {
+    background: var(--white);
+    color: var(--dark-blue);
+}
+
+.btn-full {
+    width: 100%;
+    justify-content: center;
+}
+
+/* ============================================
+   SECTION HEADERS
+   ============================================ */
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.section-subtitle {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: var(--dark-blue);
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   AZIENDA SECTION
+   ============================================ */
+.azienda {
+    padding: 120px 0;
+    background: var(--bg-cream);
+}
+
+.azienda-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.azienda-image {
+    position: relative;
+}
+
+.azienda-image::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: -20px;
+    bottom: -20px;
+    border: 3px solid var(--primary-gold);
+    z-index: 0;
+}
+
+.azienda-image img {
+    position: relative;
+    z-index: 1;
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+
+.azienda-content .section-subtitle {
+    text-align: left;
+}
+
+.azienda-content .section-title {
+    text-align: left;
+    font-size: 2.5rem;
+}
+
+.azienda-content p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.azienda-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--primary-gold);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   WINE CATEGORY SECTIONS
+   ============================================ */
+.wine-category {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+}
+
+/* Vini Rossi - Warm Red Background */
+.wine-category[data-category="rossi"] {
+    background: #fdf5f5;
+}
+
+.wine-category[data-category="rossi"] .wine-category-bg {
+    background: linear-gradient(135deg, #fdf5f5 0%, #f8e8e8 100%);
+}
+
+/* Vini Bianchi - Fresh White Background */
+.wine-category[data-category="bianchi"] {
+    background: #f8fbfd;
+}
+
+.wine-category[data-category="bianchi"] .wine-category-bg {
+    background: linear-gradient(135deg, #f8fbfd 0%, #eef5f9 100%);
+}
+
+/* Spumanti - Light Gold Background */
+.wine-category[data-category="spumanti"] {
+    background: #fefdf8;
+}
+
+.wine-category[data-category="spumanti"] .wine-category-bg {
+    background: linear-gradient(135deg, #fefdf8 0%, #faf5e8 100%);
+}
+
+/* Passiti - Warm Amber Background */
+.wine-category[data-category="passiti"] {
+    background: #fdf9f5;
+}
+
+.wine-category[data-category="passiti"] .wine-category-bg {
+    background: linear-gradient(135deg, #fdf9f5 0%, #f8efe8 100%);
+}
+
+.wine-category-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+}
+
+.wine-category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.wine-category-reverse .wine-category-grid {
+    direction: rtl;
+}
+
+.wine-category-reverse .wine-category-grid > * {
+    direction: ltr;
+}
+
+.wine-category-content .section-subtitle {
+    text-align: left;
+}
+
+.wine-category-content .section-title {
+    text-align: left;
+    font-size: 2.5rem;
+}
+
+.wine-category-content > p {
+    color: var(--text-light);
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+}
+
+.wine-list {
+    margin-bottom: 35px;
+}
+
+.wine-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.wine-list strong {
+    color: var(--burgundy);
+}
+
+.wine-category-image {
+    position: relative;
+}
+
+.wine-category-image img {
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.wine-category-image:hover img {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ============================================
+   EXPERIENCES SECTION
+   ============================================ */
+.experiences {
+    padding: 120px 0;
+    background: var(--bg-light);
+}
+
+.experiences-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.experience-card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+}
+
+.experience-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.experience-card.featured {
+    background: var(--dark-blue);
+    color: var(--white);
+    transform: scale(1.05);
+}
+
+.experience-card.featured:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.experience-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-gold);
+    color: var(--dark-blue);
+    padding: 6px 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 20px;
+}
+
+.experience-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(201, 162, 39, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+
+.experience-card.featured .experience-icon {
+    background: rgba(201, 162, 39, 0.2);
+}
+
+.experience-icon i {
+    font-size: 1.8rem;
+    color: var(--primary-gold);
+}
+
+.experience-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--dark-blue);
+}
+
+.experience-card.featured h3 {
+    color: var(--white);
+}
+
+.experience-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.experience-card.featured p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.experience-price {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--primary-gold);
+    margin-bottom: 25px;
+}
+
+/* ============================================
+   SHOP CTA SECTION
+   ============================================ */
+.shop-cta {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+}
+
+.shop-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?1920_1080') center/cover no-repeat;
+}
+
+.shop-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(114, 47, 55, 0.8) 100%);
+}
+
+.shop-cta-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.shop-cta-content h2 {
+    font-size: 2.8rem;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+.shop-cta-content p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+}
+
+.shop-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   CONTATTI SECTION
+   ============================================ */
+.contatti {
+    padding: 120px 0;
+    background: var(--bg-cream);
+}
+
+.contatti-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.contatti-info .section-subtitle {
+    text-align: left;
+}
+
+.contatti-info .section-title {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.contatti-details {
+    margin-bottom: 40px;
+}
+
+.contatto-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.contatto-item i {
+    width: 50px;
+    height: 50px;
+    background: rgba(201, 162, 39, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-gold);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.contatto-item strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--dark-blue);
+}
+
+.contatto-item p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    background: var(--dark-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    background: var(--primary-gold);
+    transform: translateY(-3px);
+}
+
+.contatti-form-wrapper {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.contatti-form h3 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--dark-blue);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background: var(--bg-light);
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-gold);
+    background: var(--white);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* ============================================
+   MAP STYLES
+   ============================================ */
+.contatti-sidebar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.contatti-map-wrapper {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.contatti-map {
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.contatti-map iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.map-directions-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 12px 20px;
+}
+
+.map-directions-btn i {
+    font-size: 1rem;
+}
+
+/* ============================================
+   TIMELINE SECTION
+   ============================================ */
+.timeline-section {
+    padding: 120px 0;
+    background: var(--bg-cream);
+}
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--primary-gold), var(--burgundy));
+}
+
+.timeline-item {
+    position: relative;
+    padding: 20px 0;
+    width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+    padding-right: 50px;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    padding-left: 50px;
+    margin-left: 50%;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-gold);
+    border: 4px solid var(--white);
+    border-radius: 50%;
+    top: 25px;
+    box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.3);
+}
+
+.timeline-item:nth-child(odd)::before {
+    right: -10px;
+}
+
+.timeline-item:nth-child(even)::before {
+    left: -10px;
+}
+
+.timeline-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-gold);
+    margin-bottom: 10px;
+}
+
+.timeline-content {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.timeline-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--burgundy);
+}
+
+.timeline-content p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* ============================================
+   AWARDS SECTION
+   ============================================ */
+.awards-section {
+    padding: 120px 0;
+    background: var(--white);
+}
+
+.awards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.award-card {
+    background: var(--bg-cream);
+    padding: 40px 25px;
+    border-radius: 10px;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.award-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-gold);
+}
+
+.award-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.award-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(201, 162, 39, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.award-icon i {
+    font-size: 2rem;
+    color: var(--primary-gold);
+}
+
+.award-year {
+    display: inline-block;
+    background: var(--burgundy);
+    color: var(--white);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.award-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: var(--dark-blue);
+}
+
+.award-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+}
+
+.award-wine {
+    display: block;
+    font-style: italic;
+    color: var(--burgundy);
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   PAIRINGS SECTION
+   ============================================ */
+.pairings-section {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.pairings-alt {
+    background: var(--white);
+}
+
+.pairings-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.pairing-card {
+    background: var(--white);
+    padding: 35px 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.pairing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.pairing-card i {
+    width: 60px;
+    height: 60px;
+    background: rgba(201, 162, 39, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.5rem;
+    color: var(--primary-gold);
+}
+
+.pairing-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--burgundy);
+}
+
+.pairing-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* ============================================
+   TESTIMONIALS SECTION
+   ============================================ */
+.testimonials-section {
+    padding: 120px 0;
+    background: var(--bg-cream);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.testimonial-card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.testimonial-stars {
+    margin-bottom: 20px;
+}
+
+.testimonial-stars i {
+    color: var(--primary-gold);
+    font-size: 1rem;
+    margin-right: 3px;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.testimonial-avatar {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-gold);
+    color: var(--dark-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+}
+
+.testimonial-author strong {
+    display: block;
+    color: var(--dark-blue);
+    font-size: 1rem;
+}
+
+.testimonial-author span {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.main-footer {
+    background: var(--dark-blue);
+    padding: 80px 0 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: 50px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-brand h3 {
+    color: var(--white);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.footer-brand p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+}
+
+.footer-links h4,
+.footer-newsletter h4 {
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-links ul li {
+    margin-bottom: 12px;
+}
+
+.footer-links ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+}
+
+.footer-links ul li a:hover {
+    color: var(--primary-gold);
+    padding-left: 5px;
+}
+
+.footer-newsletter p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+}
+
+.newsletter-form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletter-form input:focus {
+    outline: none;
+    border-color: var(--primary-gold);
+}
+
+.newsletter-form .btn {
+    justify-content: center;
+}
+
+.footer-bottom {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: var(--primary-gold);
+    font-size: 0.9rem;
+}
+
+.footer-bottom p a {
+    color: var(--primary-gold);
+}
+
+.footer-bottom p a:hover {
+    text-decoration: underline;
+}
+
+.footer-brand {
+    color: var(--primary-gold);
+}
+
+.footer-credit {
+    color: var(--primary-gold);
+}
+
+.footer-credit span {
+    color: var(--primary-gold);
+}
+
+.footer-demo {
+    color: var(--primary-gold-dark);
+}
+
+.footer-link {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: #d4af37;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.footer-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 1px;
+  background-color: #d4af37;
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .experiences-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .experience-card.featured {
+        transform: none;
+    }
+    
+    .awards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .pairings-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 80px;
+        padding-right: 0;
+        text-align: left;
+    }
+    
+    .timeline-item:nth-child(even) {
+        margin-left: 0;
+    }
+    
+    .timeline-item:nth-child(odd)::before {
+        right: auto;
+        left: 20px;
+    }
+    
+    .timeline-item:nth-child(even)::before {
+        left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: var(--dark-blue);
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        transition: var(--transition);
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-toggle {
+        display: flex;
+        z-index: 1001;
+    }
+    
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .azienda-grid,
+    .wine-category-grid,
+    .contatti-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .wine-category-reverse .wine-category-grid {
+        direction: ltr;
+    }
+    
+    .azienda-image::before {
+        display: none;
+    }
+    
+    .experiences-grid,
+    .awards-grid,
+    .pairings-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 0;
+        text-align: left;
+    }
+    
+    .timeline-item:nth-child(even) {
+        margin-left: 0;
+    }
+    
+    .timeline-item:nth-child(odd)::before {
+        right: auto;
+        left: 10px;
+    }
+    
+    .timeline-item:nth-child(even)::before {
+        left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+    
+    .azienda-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .contatti-map {
+        height: 200px;
+    }
+    
+    .contatti-map-wrapper {
+        padding: 15px;
+    }
+}
